@@ -4,20 +4,23 @@
  */
 package VistaControlador;
 
+import java.util.ArrayList;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import BBDD.bbdd;
 
 /**
  *
  * @author DAM2_10
  */
 public class Login extends javax.swing.JFrame {
-
-    /**
-     * Creates new form Ventana
-     */
+ 
+    
+    
     public Login() {
         initComponents();
+        bbdd.crearBBBDD();
+        
     }
 
     /**
@@ -36,6 +39,7 @@ public class Login extends javax.swing.JFrame {
         mostrar = new javax.swing.JCheckBox();
         loguear = new javax.swing.JButton();
         campoPassword = new javax.swing.JPasswordField();
+        crear_cuenta = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -62,6 +66,13 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
+        crear_cuenta.setText("crear cuenta ");
+        crear_cuenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                crear_cuentaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -72,9 +83,6 @@ public class Login extends javax.swing.JFrame {
                 .addGap(32, 32, 32))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(194, 194, 194)
-                        .addComponent(loguear))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(106, 106, 106)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -87,7 +95,14 @@ public class Login extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(campoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(33, 33, 33)
-                        .addComponent(mostrar)))
+                        .addComponent(mostrar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(192, 192, 192)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(crear_cuenta)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(loguear)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -106,7 +121,9 @@ public class Login extends javax.swing.JFrame {
                     .addComponent(campoPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(32, 32, 32)
                 .addComponent(loguear)
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(crear_cuenta)
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         pack();
@@ -133,6 +150,16 @@ public class Login extends javax.swing.JFrame {
             campoPassword.setEchoChar('*');
         }
     }//GEN-LAST:event_mostrarActionPerformed
+
+    private void crear_cuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crear_cuentaActionPerformed
+       
+        CrearUsuario ventana = new CrearUsuario();
+        ventana.setVisible(true);
+        ventana.setLocationRelativeTo(null);
+        this.setVisible(false);
+        
+        
+    }//GEN-LAST:event_crear_cuentaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -182,6 +209,7 @@ public class Login extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPasswordField campoPassword;
     private javax.swing.JTextField campoUsuario;
+    private javax.swing.JButton crear_cuenta;
     private javax.swing.JButton loguear;
     private javax.swing.JCheckBox mostrar;
     private javax.swing.JLabel textoPassword;

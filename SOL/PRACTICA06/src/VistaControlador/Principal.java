@@ -20,10 +20,7 @@ public class Principal extends javax.swing.JFrame {
 //        
        textoBienvenido.setText("bienvenido "+ nombre);
        textoUsuario.setText("El usuario "+nombre+" esta logueado");
-        
-       
-        
-        
+
     }
 
     /**
@@ -39,6 +36,7 @@ public class Principal extends javax.swing.JFrame {
         cerrarSesion = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         textoUsuario = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -52,49 +50,59 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\DAM2_10\\Documents\\GitHub\\pr-ctica-2-6-pantalla-de-login-lordyhg12\\media\\Captura.PNG")); // NOI18N
-
         textoUsuario.setText("el usuario javier esta  logueado ");
+
+        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\dam2\\Documents\\GitHub\\pr-ctica-2-6-pantalla-de-login-lordyhg12\\media\\Captura.PNG")); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(141, 141, 141)
+                .addComponent(textoBienvenido)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(131, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addGap(163, 163, 163))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(textoBienvenido)
-                        .addGap(130, 130, 130))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(textoUsuario)
                         .addGap(110, 110, 110))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(cerrarSesion)
-                        .addGap(144, 144, 144))))
+                        .addGap(144, 144, 144))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(169, 169, 169))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(67, 67, 67)
+                .addGap(38, 38, 38)
                 .addComponent(textoBienvenido)
                 .addGap(18, 18, 18)
+                .addComponent(jLabel1)
+                .addGap(13, 13, 13)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(textoUsuario)
                 .addGap(18, 18, 18)
                 .addComponent(cerrarSesion)
-                .addContainerGap(86, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void cerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrarSesionActionPerformed
-     System.exit(0);
+    
+       Login ventana = new Login();
+      ventana.setVisible(true);
+      ventana.setLocationRelativeTo(null);
+     this.setVisible(false);
     }//GEN-LAST:event_cerrarSesionActionPerformed
 
     /**
@@ -134,6 +142,7 @@ public class Principal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cerrarSesion;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel textoBienvenido;
     private javax.swing.JLabel textoUsuario;
