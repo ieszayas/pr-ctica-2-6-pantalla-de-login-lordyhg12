@@ -18,7 +18,7 @@ public class Conexiones {
     public static Connection conectar() {
 
         if (con == null) {
-            String cadena_conexion = "jdbc:mysql://localhost:3307/";
+            String cadena_conexion = "jdbc:mysql://localhost:3306/";
             String nombre_bbdd = "bbdd_users";
             String usuario = "root";
             String contra = null;

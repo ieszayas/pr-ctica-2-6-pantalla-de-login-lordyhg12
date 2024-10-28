@@ -1,22 +1,32 @@
 package VistaControlador;
 
 import static BBDD.OperacionesBaseDatos.registrarUsuarios;
+import static BBDD.OperacionesBaseDatos.verificarUsuarioD;
 import Modelo.Usuario;
+import java.awt.Color;
 import java.awt.Point;
+import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-
+import javax.swing.border.Border;
+import com.toedter.calendar.JDateChooser;
+import java.awt.FlowLayout;
+import javax.swing.JButton;
+import javax.swing.JFrame;
 /**
  *
  * @author dam2
  */
 public class CrearUsuario extends javax.swing.JFrame {
+ private JDateChooser dateChooser;
+    private JButton botonFecha;
 
     /**
      * Creates new form CrearUsuario
      */
     public CrearUsuario() {
         initComponents();
+        
     }
 
     /**
@@ -70,6 +80,12 @@ public class CrearUsuario extends javax.swing.JFrame {
         jLabel8.setText("fecha de naciemineto ");
 
         jLabel9.setText("correo");
+
+        correo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                correoActionPerformed(evt);
+            }
+        });
 
         fechaN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -231,7 +247,32 @@ public class CrearUsuario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void fechaNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fechaNActionPerformed
-        // TODO add your handling code here:
+
+
+
+        initComponents();
+ dateChooser = new JDateChooser();
+        botonFecha = new JButton("Seleccionar Fecha de Nacimiento");
+        
+        botonFecha.addActionListener(e -> {
+            dateChooser.setVisible(true);
+        });
+        
+        add(dateChooser);
+        add(botonFecha);
+        
+       
+        setLayout(new FlowLayout());
+        setSize(400, 300);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setVisible(true);
+        
+    
+    
+        
+    
+
+
     }//GEN-LAST:event_fechaNActionPerformed
 
     private void volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverActionPerformed
@@ -244,7 +285,21 @@ public class CrearUsuario extends javax.swing.JFrame {
     private void passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_passwordActionPerformed
-
+public boolean validarOpcionales(String email) {
+    
+     Border check_verde = BorderFactory.createLineBorder(Color.green, 1);
+        Border cruz_rojo = BorderFactory.createLineBorder(Color.ORANGE, 1);
+    if (email != null && !email.isEmpty() && !email.matches("^[A-Za-z0-9+_.-]+@(.+)$")) {
+        JOptionPane.showMessageDialog(null, "Formato de email incorrecto");
+        correo.setBorder(cruz_rojo);
+        return false;
+    }else{
+          correo.setBorder(check_verde);
+    }
+   
+    
+    return true;
+}
     private void agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarActionPerformed
 
         String password1 = password.getText();
@@ -259,7 +314,33 @@ public class CrearUsuario extends javax.swing.JFrame {
         String fecha= fechaN.getText();
         
         
+        String gmail=correo.getText();
+        
+       
+        
+        
         if (password1.equals(password2) && !(user.isEmpty())) {
+          if(  verificarUsuarioD(user)){
+              
+              JOptionPane.showMessageDialog(null, "usuario ya existe .");
+          }else{
+            if (!gmail.isEmpty()){
+                
+               if( validarOpcionales(gmail)==true){
+                   Usuario usr =new Usuario(user,password1,nom,apell,corr,fecha);
+             registrarUsuarios(usr);
+            JOptionPane.showMessageDialog(null, "usuario agregado exitosamente .");
+            Login ventana = new Login();
+        ventana.setVisible(true);
+        ventana.setLocationRelativeTo(null);
+        this.setVisible(false);
+                   
+               }else{
+                  return;
+               }
+                
+            }
+           
             
             Usuario usr =new Usuario(user,password1,nom,apell,corr,fecha);
              registrarUsuarios(usr);
@@ -270,12 +351,16 @@ public class CrearUsuario extends javax.swing.JFrame {
         this.setVisible(false);
             
             
+          } 
             
         } else {
 
             JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden o no registro un usuario . Intenta de nuevo.", "Error", JOptionPane.ERROR_MESSAGE);
         }
+       
 
+        
+        
 
     }//GEN-LAST:event_agregarActionPerformed
 
@@ -303,9 +388,15 @@ public class CrearUsuario extends javax.swing.JFrame {
 
     }//GEN-LAST:event_mostrarCActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void correoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_correoActionPerformed
+
+    
+        
+        
+     
+    }//GEN-LAST:event_correoActionPerformed
+
+   
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

@@ -188,7 +188,8 @@ public void vibrarVentana(JFrame ventana) {
 
     private void mostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarActionPerformed
         if(mostrar.isSelected()){
-            campoPassword.setEchoChar((char)0);       
+            campoPassword.setEchoChar((char)0); 
+            
         }else{
             campoPassword.setEchoChar('*');
         }
