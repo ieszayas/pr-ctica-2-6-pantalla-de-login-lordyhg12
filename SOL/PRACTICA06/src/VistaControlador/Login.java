@@ -7,7 +7,13 @@ package VistaControlador;
 import java.util.ArrayList;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import BBDD.bbdd;
+import BBDD.CrearBaseDatos;
+import static BBDD.OperacionesBaseDatos.loginJugador;
+import java.awt.Color;
+import java.awt.Point;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -19,7 +25,8 @@ public class Login extends javax.swing.JFrame {
     
     public Login() {
         initComponents();
-        bbdd.crearBBBDD();
+        
+        CrearBaseDatos.crearBBBDD();
         
     }
 
@@ -131,17 +138,53 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void loguearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loguearActionPerformed
-   
-      
+    String usu= campoUsuario.getText();
+    String contra =campoPassword.getText();
+if(loginJugador(usu,contra)){      
            Principal ventana = new Principal(campoUsuario.getText());
            ventana.setLocationRelativeTo(null);
            this.setVisible(false);
            ventana.setVisible(true);
-     
+}else{
+     JFrame ventanaError = new JFrame();
+        ventanaError.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        ventanaError.setSize(300, 100);
+        ventanaError.setLocationRelativeTo(null);  // Centrar la ventana
+       
+               
+
+      
+        JLabel mensajeError = new JLabel("Usuario o Contraseña incorrecta", JLabel.CENTER);
+        ventanaError.add(mensajeError);
+
+       
+        ventanaError.setVisible(true);
+
+        vibrarVentana(ventanaError);
+    
+}  
        
         
         
     }//GEN-LAST:event_loguearActionPerformed
+public void vibrarVentana(JFrame ventana) {
+    Point location = ventana.getLocation(); 
+    int desplazamiento = 10; 
+    int duracion = 50; 
+
+    try {
+        for (int i = 0; i < 6; i++) {
+            ventana.setLocation(location.x + desplazamiento, location.y);
+            Thread.sleep(duracion);
+            ventana.setLocation(location.x - desplazamiento, location.y);
+            Thread.sleep(duracion);
+        }
+        // Devolver la ventana a su posición original
+        ventana.setLocation(location);
+    } catch (InterruptedException ex) {
+       System.out.println(ex.getMessage());
+    }
+}
 
     private void mostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarActionPerformed
         if(mostrar.isSelected()){
