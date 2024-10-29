@@ -20,14 +20,12 @@ import javax.swing.JOptionPane;
  * @author DAM2_10
  */
 public class Login extends javax.swing.JFrame {
- 
-    
-    
+
     public Login() {
         initComponents();
-        
+
         CrearBaseDatos.crearBBBDD();
-        
+
     }
 
     /**
@@ -138,71 +136,67 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void loguearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loguearActionPerformed
-    String usu= campoUsuario.getText();
-    String contra =campoPassword.getText();
-if(loginJugador(usu,contra)){      
-           Principal ventana = new Principal(campoUsuario.getText());
-           ventana.setLocationRelativeTo(null);
-           this.setVisible(false);
-           ventana.setVisible(true);
-}else{
-     JFrame ventanaError = new JFrame();
-        ventanaError.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        ventanaError.setSize(300, 100);
-        ventanaError.setLocationRelativeTo(null);  // Centrar la ventana
-       
-               
+        String usu = campoUsuario.getText();
+        String contra = campoPassword.getText();
+        if (loginJugador(usu, contra)) {
+            Principal ventana = new Principal(campoUsuario.getText());
+            ventana.setLocationRelativeTo(null);
+            this.setVisible(false);
+            ventana.setVisible(true);
+        } else {
+            JFrame ventanaError = new JFrame();
+            ventanaError.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            ventanaError.setSize(300, 100);
+            ventanaError.setLocationRelativeTo(null); 
+            
 
-      
-        JLabel mensajeError = new JLabel("Usuario o Contraseña incorrecta", JLabel.CENTER);
-        ventanaError.add(mensajeError);
+            JLabel mensajeError = new JLabel("Usuario o Contraseña incorrecta", JLabel.CENTER);
+            ventanaError.add(mensajeError);
 
-       
-        ventanaError.setVisible(true);
+            ventanaError.setVisible(true);
 
-        vibrarVentana(ventanaError);
-    
-}  
-       
-        
-        
-    }//GEN-LAST:event_loguearActionPerformed
-public void vibrarVentana(JFrame ventana) {
-    Point location = ventana.getLocation(); 
-    int desplazamiento = 10; 
-    int duracion = 50; 
+            vibrarVentana(ventanaError);
 
-    try {
-        for (int i = 0; i < 6; i++) {
-            ventana.setLocation(location.x + desplazamiento, location.y);
-            Thread.sleep(duracion);
-            ventana.setLocation(location.x - desplazamiento, location.y);
-            Thread.sleep(duracion);
         }
-        // Devolver la ventana a su posición original
-        ventana.setLocation(location);
-    } catch (InterruptedException ex) {
-       System.out.println(ex.getMessage());
+
+
+    }//GEN-LAST:event_loguearActionPerformed
+    public void vibrarVentana(JFrame ventana) {
+        Point location = ventana.getLocation();
+        int desplazamiento = 10;
+        int duracion = 50;
+
+        try {
+            for (int i = 0; i < 6; i++) {
+                ventana.setLocation(location.x + desplazamiento, location.y);
+                Thread.sleep(duracion);
+                ventana.setLocation(location.x - desplazamiento, location.y);
+                Thread.sleep(duracion);
+            }
+            // Devolver la ventana a su posición original
+            ventana.setLocation(location);
+        } catch (InterruptedException ex) {
+            System.out.println(ex.getMessage());
+        }
     }
-}
 
     private void mostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarActionPerformed
-        if(mostrar.isSelected()){
-            campoPassword.setEchoChar((char)0); 
-            
-        }else{
+        if (mostrar.isSelected()) {
+            campoPassword.setEchoChar((char) 0);
+
+        } else {
             campoPassword.setEchoChar('*');
         }
     }//GEN-LAST:event_mostrarActionPerformed
 
     private void crear_cuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crear_cuentaActionPerformed
-       
+
         CrearUsuario ventana = new CrearUsuario();
         ventana.setVisible(true);
         ventana.setLocationRelativeTo(null);
         this.setVisible(false);
-        
-        
+
+
     }//GEN-LAST:event_crear_cuentaActionPerformed
 
     /**
@@ -248,7 +242,7 @@ public void vibrarVentana(JFrame ventana) {
     public void setCampoUsuario(JTextField campoUsuario) {
         this.campoUsuario = campoUsuario;
     }
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPasswordField campoPassword;

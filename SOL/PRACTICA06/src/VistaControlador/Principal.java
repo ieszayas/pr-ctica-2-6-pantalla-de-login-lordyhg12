@@ -4,23 +4,31 @@
  */
 package VistaControlador;
 
+import Modelo.Usuario;
+import BBDD.OperacionesBaseDatos;
+import static BBDD.OperacionesBaseDatos.cambiarPassword;
+
+
+import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
+
 /**
  *
  * @author DAM2_10
  */
 public class Principal extends javax.swing.JFrame {
-
+ private String usr;
     /**
      * Creates new form Principal
      */
     public Principal(String nombre) {
         initComponents();
-       
-      
+        
+          
 //        
-       textoBienvenido.setText("bienvenido "+ nombre);
-       textoUsuario.setText("El usuario "+nombre+" esta logueado");
-
+        textoBienvenido.setText("bienvenido " + nombre);
+        textoUsuario.setText("El usuario " + nombre + " esta logueado");
+        usr=nombre;
     }
 
     /**
@@ -39,6 +47,8 @@ public class Principal extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        modificar = new javax.swing.JButton();
+        imagen = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -54,42 +64,60 @@ public class Principal extends javax.swing.JFrame {
 
         textoUsuario.setText("el usuario javier esta  logueado ");
 
-        jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\dam2\\Documents\\GitHub\\pr-ctica-2-6-pantalla-de-login-lordyhg12\\SOL\\PRACTICA06\\img\\Captura.PNG")); // NOI18N
+        modificar.setText("modificar contraseña");
+        modificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                modificarActionPerformed(evt);
+            }
+        });
+
+        imagen.setIcon(new javax.swing.ImageIcon("C:\\Users\\gg\\OneDrive\\Documentos\\GitHub\\pr-ctica-2-6-pantalla-de-login-lordyhg12\\SOL\\PRACTICA06\\src\\img\\Captura.PNG")); // NOI18N
+        imagen.setText("jk");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(172, 172, 172)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(163, 163, 163))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(251, 251, 251))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addGap(0, 0, Short.MAX_VALUE))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(126, 126, 126)
-                .addComponent(textoBienvenido)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(114, 114, 114)
+                        .addGap(117, 117, 117)
                         .addComponent(textoUsuario))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(153, 153, 153)
+                        .addGap(146, 146, 146)
                         .addComponent(cerrarSesion)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(126, 126, 126)
+                        .addComponent(textoBienvenido))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(128, 128, 128)
+                        .addComponent(modificar)))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(172, 172, 172)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(imagen, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(jLabel1)
+                                        .addGap(251, 251, 251))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(jLabel3)
+                                        .addGap(163, 163, 163))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addGap(0, 0, Short.MAX_VALUE))))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -106,24 +134,57 @@ public class Principal extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel1)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(imagen)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(textoUsuario)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(cerrarSesion)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(modificar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(8, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void cerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrarSesionActionPerformed
-    
-       Login ventana = new Login();
-      ventana.setVisible(true);
-      ventana.setLocationRelativeTo(null);
-     this.setVisible(false);
+
+        Login ventana = new Login();
+        ventana.setVisible(true);
+        ventana.setLocationRelativeTo(null);
+        this.setVisible(false);
     }//GEN-LAST:event_cerrarSesionActionPerformed
+private void solicitarNuevaPassword(String usuario) {
+    JPasswordField nuevaPasswordField = new JPasswordField(15);
+
+    Object[] message = {
+        "Ingrese la nueva contraseña:", nuevaPasswordField
+    };
+
+    int option = JOptionPane.showConfirmDialog(null, message, "Cambiar Contraseña", JOptionPane.OK_CANCEL_OPTION);
+
+    if (option == JOptionPane.OK_OPTION) {
+        String nuevaPassword = new String(nuevaPasswordField.getPassword());
+
+        if (nuevaPassword.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "La contraseña no puede estar vacía.");
+            return;
+        }
+
+      
+        boolean success = cambiarPassword(usuario, nuevaPassword);
+        if (success) {
+            JOptionPane.showMessageDialog(null, "se cambio  exitosamente.");
+        }
+    }
+}
+    private void modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarActionPerformed
+  String usuario =usr;
+  
+   solicitarNuevaPassword(usuario);
+    }//GEN-LAST:event_modificarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -162,10 +223,12 @@ public class Principal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cerrarSesion;
+    private javax.swing.JLabel imagen;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JButton modificar;
     private javax.swing.JLabel textoBienvenido;
     private javax.swing.JLabel textoUsuario;
     // End of variables declaration//GEN-END:variables

@@ -11,22 +11,23 @@ import javax.swing.JOptionPane;
 import javax.swing.border.Border;
 import com.toedter.calendar.JDateChooser;
 import java.awt.FlowLayout;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+
 /**
  *
  * @author dam2
  */
 public class CrearUsuario extends javax.swing.JFrame {
- private JDateChooser dateChooser;
-    private JButton botonFecha;
 
     /**
      * Creates new form CrearUsuario
      */
     public CrearUsuario() {
         initComponents();
-        
+
     }
 
     /**
@@ -52,7 +53,6 @@ public class CrearUsuario extends javax.swing.JFrame {
         nombre = new javax.swing.JTextField();
         apellido = new javax.swing.JTextField();
         correo = new javax.swing.JTextField();
-        fechaN = new javax.swing.JTextField();
         volver = new javax.swing.JButton();
         agregar = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
@@ -60,6 +60,7 @@ public class CrearUsuario extends javax.swing.JFrame {
         passwordC = new javax.swing.JPasswordField();
         mostrar = new javax.swing.JCheckBox();
         mostrarC = new javax.swing.JCheckBox();
+        calendario = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -84,12 +85,6 @@ public class CrearUsuario extends javax.swing.JFrame {
         correo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 correoActionPerformed(evt);
-            }
-        });
-
-        fechaN.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fechaNActionPerformed(evt);
             }
         });
 
@@ -138,29 +133,33 @@ public class CrearUsuario extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 1, Short.MAX_VALUE)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 59, Short.MAX_VALUE)
                 .addGap(514, 514, 514))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel8)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel7)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(volver)
-                                    .addGap(55, 55, 55)
-                                    .addComponent(agregar))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel6)
-                                    .addGap(232, 232, 232)))))
+                        .addGap(204, 204, 204)
+                        .addComponent(calendario, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(fechaN, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(correo, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(25, 25, 25)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel9)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(correo, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jLabel7)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(volver)
+                                            .addGap(55, 55, 55)
+                                            .addComponent(agregar))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jLabel6)
+                                            .addGap(232, 232, 232)))))
                             .addComponent(apellido, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(layout.createSequentialGroup()
@@ -190,7 +189,7 @@ public class CrearUsuario extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(mostrar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(mostrarC, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jSeparator2)
         );
         layout.setVerticalGroup(
@@ -215,27 +214,26 @@ public class CrearUsuario extends javax.swing.JFrame {
                 .addGap(24, 24, 24)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel5)
-                        .addGap(24, 24, 24)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
-                            .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel7)
-                            .addComponent(apellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addComponent(correo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(21, 21, 21)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel5)
+                .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(fechaN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                    .addComponent(jLabel6)
+                    .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(apellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(14, 14, 14)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(correo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(calendario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(volver)
                     .addComponent(agregar))
@@ -245,35 +243,6 @@ public class CrearUsuario extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void fechaNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fechaNActionPerformed
-
-
-
-        initComponents();
- dateChooser = new JDateChooser();
-        botonFecha = new JButton("Seleccionar Fecha de Nacimiento");
-        
-        botonFecha.addActionListener(e -> {
-            dateChooser.setVisible(true);
-        });
-        
-        add(dateChooser);
-        add(botonFecha);
-        
-       
-        setLayout(new FlowLayout());
-        setSize(400, 300);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setVisible(true);
-        
-    
-    
-        
-    
-
-
-    }//GEN-LAST:event_fechaNActionPerformed
 
     private void volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverActionPerformed
         Login ventana = new Login();
@@ -285,82 +254,82 @@ public class CrearUsuario extends javax.swing.JFrame {
     private void passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_passwordActionPerformed
-public boolean validarOpcionales(String email) {
-    
-     Border check_verde = BorderFactory.createLineBorder(Color.green, 1);
+    public boolean validarOpcionales(String email) {
+
+        Border check_verde = BorderFactory.createLineBorder(Color.green, 1);
         Border cruz_rojo = BorderFactory.createLineBorder(Color.ORANGE, 1);
-    if (email != null && !email.isEmpty() && !email.matches("^[A-Za-z0-9+_.-]+@(.+)$")) {
-        JOptionPane.showMessageDialog(null, "Formato de email incorrecto");
-        correo.setBorder(cruz_rojo);
-        return false;
-    }else{
-          correo.setBorder(check_verde);
+        if (email != null && !email.isEmpty() && !email.matches("^[A-Za-z0-9+_.-]+@(.+)$")) {
+            JOptionPane.showMessageDialog(null, "Formato de email incorrecto");
+            correo.setBorder(cruz_rojo);
+            return false;
+        } else {
+            correo.setBorder(check_verde);
+        }
+
+        return true;
     }
-   
-    
-    return true;
-}
     private void agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarActionPerformed
 
         String password1 = password.getText();
 
         String password2 = passwordC.getText();
-        
-        String user=usuario.getText();
-        
+
+        String user = usuario.getText();
+
         String nom = nombre.getText();
-        String apell= apellido.getText();
-        String corr= correo.getText();
-        String fecha= fechaN.getText();
+        String apell = apellido.getText();
+        String corr = correo.getText();
+
+        String gmail = correo.getText();
+
+        Date uno = calendario.getDate();
         
-        
-        String gmail=correo.getText();
-        
+        String fecha = "";
+
+if (uno != null) {
+    SimpleDateFormat formatear = new SimpleDateFormat("dd/MM/yyyy");
+    fecha = formatear.format(uno);
+}
        
-        
-        
+       
         if (password1.equals(password2) && !(user.isEmpty())) {
-          if(  verificarUsuarioD(user)){
-              
-              JOptionPane.showMessageDialog(null, "usuario ya existe .");
-          }else{
-            if (!gmail.isEmpty()){
-                
-               if( validarOpcionales(gmail)==true){
-                   Usuario usr =new Usuario(user,password1,nom,apell,corr,fecha);
-             registrarUsuarios(usr);
-            JOptionPane.showMessageDialog(null, "usuario agregado exitosamente .");
-            Login ventana = new Login();
-        ventana.setVisible(true);
-        ventana.setLocationRelativeTo(null);
-        this.setVisible(false);
-                   
-               }else{
-                  return;
-               }
-                
+
+            if (verificarUsuarioD(user)) {
+
+                JOptionPane.showMessageDialog(null, "usuario ya existe .");
+            } else {
+                if (!gmail.isEmpty()) {
+
+                    if (validarOpcionales(gmail) == true) {
+                        Usuario usr = new Usuario(user, password1, nom, apell, corr, fecha);
+                        registrarUsuarios(usr);
+                        JOptionPane.showMessageDialog(null, "usuario agregado exitosamente .");
+                        Login ventana = new Login();
+                        ventana.setVisible(true);
+                        ventana.setLocationRelativeTo(null);
+                        this.setVisible(false);
+                         return;
+                    } else {
+                        return;
+                    }
+
+                }
+
+                Usuario usr = new Usuario(user, password1, nom, apell, corr, fecha);
+                registrarUsuarios(usr);
+                JOptionPane.showMessageDialog(null, "usuario agregado exitosamente .");
+                Login ventana = new Login();
+                ventana.setVisible(true);
+                ventana.setLocationRelativeTo(null);
+                this.setVisible(false);
+
             }
-           
-            
-            Usuario usr =new Usuario(user,password1,nom,apell,corr,fecha);
-             registrarUsuarios(usr);
-            JOptionPane.showMessageDialog(null, "usuario agregado exitosamente .");
-            Login ventana = new Login();
-        ventana.setVisible(true);
-        ventana.setLocationRelativeTo(null);
-        this.setVisible(false);
-            
-            
-          } 
-            
+
         } else {
 
             JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden o no registro un usuario . Intenta de nuevo.", "Error", JOptionPane.ERROR_MESSAGE);
         }
-       
 
-        
-        
 
     }//GEN-LAST:event_agregarActionPerformed
 
@@ -390,13 +359,9 @@ public boolean validarOpcionales(String email) {
 
     private void correoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_correoActionPerformed
 
-    
-        
-        
-     
+
     }//GEN-LAST:event_correoActionPerformed
 
-   
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -432,8 +397,8 @@ public boolean validarOpcionales(String email) {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton agregar;
     private javax.swing.JTextField apellido;
+    private com.toedter.calendar.JDateChooser calendario;
     private javax.swing.JTextField correo;
-    private javax.swing.JTextField fechaN;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

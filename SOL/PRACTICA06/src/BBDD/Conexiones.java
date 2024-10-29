@@ -1,41 +1,49 @@
-
 package BBDD;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Properties;
 import java.util.Scanner;
-
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Conexiones {
-    
-    
+
     private static Connection con = null;
-    
-    private static Scanner sc =null;
-    
-    
+
+  
+
     public static Connection conectar() {
 
         if (con == null) {
-            String cadena_conexion = "jdbc:mysql://localhost:3306/";
-            String nombre_bbdd = "bbdd_users";
-            String usuario = "root";
-            String contra = null;
-
             try {
+                File archivo = new File("src/fichero_config/config.properties");
 
-                con = DriverManager.getConnection(cadena_conexion + nombre_bbdd, usuario, contra);
+                if (archivo.exists()) {
+                    String arr[] = leerFichero(archivo);
 
-            } catch (SQLException e) {
-                System.out.println("Error: Fallo de conexion interna");
-                System.out.println(e.getMessage());
+                    String usuario = arr[0];
+                    String password = arr[1];
+                    String url = arr[2];
+
+                    con = DriverManager.getConnection(url, usuario, password);
+
+                } else {
+                    System.out.println("No existe el archivo de configuración");
+                }
+            } catch (SQLException ex) {
+                System.out.println("Error: Fallo de conexion interna xd");
+                ex.printStackTrace();
             }
-
         }
         return con;
 
     }
+
     public static void cerrarConexion() {
 
         if (con != null) {
@@ -49,5 +57,22 @@ public class Conexiones {
             System.out.println("No hay conexion activa para cerrar.");
         }
     }
-    
+
+    public static String[] leerFichero(File archivo) {
+        Properties propiedades = new Properties();
+
+        try ( FileInputStream input = new FileInputStream(archivo)) {
+            propiedades.load(input);
+            String usuario = propiedades.getProperty("db.user");
+            String password = propiedades.getProperty("db.password");
+            String conexion = propiedades.getProperty("db.url");
+
+            String arr[] = {usuario, password, conexion};
+            return arr;
+        } catch (IOException e) {
+            System.out.println("Error al cargar el archivo: " + e.getMessage());
+        }
+        return new String[]{"Error al cargar el archivo"};
+    }
+
 }

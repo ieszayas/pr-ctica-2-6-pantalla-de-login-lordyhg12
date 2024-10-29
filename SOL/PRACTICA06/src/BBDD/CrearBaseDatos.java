@@ -1,10 +1,13 @@
 package BBDD;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -35,11 +38,11 @@ public class CrearBaseDatos {
 
                 String CrearTablaJugador = "CREATE TABLE IF NOT EXISTS usuario("
                         + " id integer AUTO_INCREMENT ,"
-                        + " usuario varchar(10) ,"
-                        + " contraseña varchar(20) NOT NULL,"
-                        + " nombre varchar(15),"
-                        + " apellido varchar(15),"
-                        + " fechaN varchar(6) DEFAULT NULL,"
+                        + " usuario varchar(30) ,"
+                        + " contraseña varchar(30) NOT NULL,"
+                        + " nombre varchar(30),"
+                        + " apellido varchar(30),"
+                        + " fechaN varchar(30) DEFAULT NULL,"
                         + " correo varchar(30),"
                         + " PRIMARY KEY(id,usuario)"
                         + " );";
